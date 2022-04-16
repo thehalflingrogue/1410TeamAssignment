@@ -21,6 +21,7 @@ public class Player
 	private String playerName = "";
 	Role playerRole;
 	int playerHealth;
+	int arrowHeld = 0;
 
 	/**
 	 * CPU Player Constructor - used when no name provided
@@ -78,12 +79,21 @@ public class Player
 		return playerHealth;
 	}
 
+	public void setPlayerHealth(int playerHealth) {
+		this.playerHealth = playerHealth;
+	}
+
 	public Role getPlayerRole() {
 		return playerRole;
 	}
 
-	public void setPlayerHealth(int playerHealth) {
-		this.playerHealth = playerHealth;
+	//# of Arrows player is holding
+	public int getArrowHeld() {
+		return arrowHeld;
+	}
+	//will be used to reset arrowHeld to 0 once the main methods pile is reduced to 0
+	public void setArrowHeld(int arrowHeld) {
+		this.arrowHeld = arrowHeld;
 	}
 
 	@Override

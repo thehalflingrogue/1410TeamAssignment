@@ -19,41 +19,17 @@ public class Dice {
 	int count =0;
 
 	String faces[] = {"Arrow", "Dynamite", "Beer", "Bullseye-1", "Bullseye-2","Gatling"};
-	String currentFace;
 
-	public Dice()
-	{
-		currentFace= faces[ranNum.nextInt(6)];
-	}
 
 	public void Roll()
 	{
-		if(count==0)
+		for (int r1 = 0; r1 < 6; r1++)
 		{
-			currentFace = faces[ranNum.nextInt(6)];
-		}
-		else if(count<=3)
-		{
-			if(currentFace.equals("Dynamite"))
-			{
-				System.out.println("Cannot re-roll Dynamite");
-			}
-			else
-			{
-				currentFace= faces[ranNum.nextInt(6)];
-			}
-		}
-		else
-		{
-			System.out.println("Cannot roll more than 3 times");
-		}
-		/*for (int i = 0; i < 5; i++) {
-
 			randomNumber = ranNum.nextInt(6);
 			diceKeptArrayList.add(randomNumber);
 //			System.out.print(randomNumber);
 //			System.out.print(" ");
-		}*/
+		}
 
 		
 
@@ -61,17 +37,16 @@ public class Dice {
 	
 	public void ReRoll()
 	{
-
-		/*for(int i = 0; i<5-diceKeptArrayList.size();i++) {
+		for(int r2 = 0; r2<6-diceKeptArrayList.size();r2++) {
 			randomNumber = ranNum.nextInt(6);
 			diceKeptArrayList.add(randomNumber);
 
-		}*/
+		}
 		
 	}
 
-	public void DiceKept(ArrayList<Integer> diceKept) {
-		
+	public void DiceKept(ArrayList<Integer> diceKept)
+	{
 		if(count>=3) {
 			return;
 		}
@@ -80,32 +55,20 @@ public class Dice {
 		count++;	
 	}
 
-	public String getCurrentFace() {
-		return currentFace;
-	}
-
-	public void setCurrentFace(String currentFace) {
-		this.currentFace = currentFace;
-	}
-
 	@Override
-	public String toString() {
-		return currentFace;
-	}
-
-	/*@Override
-	public String toString() {
+	public String toString()
+	{
 		String diceString = "";
-
-	 for (int i: diceKeptArrayList) {
-		 diceString += faces[i] + ", ";
-
-
-	 }
+	 	for (int i: diceKeptArrayList)
+	 	{
+			diceString += faces[i] + ", ";
+			//"Dice #" + i + " is: " +	faces[i] + "\n";
+			//seems to be stepping through faces randomly? Needs fix - use line 54 in Bang class to test this
+	 	}
 
 		return diceString;
 
-	}*/
+	}
 
 }
 

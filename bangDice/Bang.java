@@ -16,8 +16,8 @@ public class Bang {
 
         int arrowPile = 9;
 
-        Dice[] dice = new Dice[6];
-        for (int i = 0; i < 6; i++) {
+        Dice[] dice = new Dice[4];
+        for (int i = 0; i < 4; i++) {
             Dice newDie = new Dice();
             dice[i] = newDie;
         }
@@ -39,57 +39,73 @@ public class Bang {
         int ranInt = rand.nextInt(4);
         int currentPlayer = rand.nextInt(4);
 
-        createPlayers(kB, players, roles, numPlayers, ranInt); //test method - will need changes once GUI is set up
+        createPlayers(kB, players, roles, numPlayers, ranInt); //test method - will need changes for GUI set up
 
-        /**
-         * Will Be the takeTurn() method - will refactor after it is working
-         */
-        Integer[] endRoll = new Integer[6];
-        endRoll[0]=7;
+        while(endGame==false)
+        {
+            takeTurn(kB, dice, players, currentPlayer, arrowPile);//includes parts that will need to be changed for GUI set up
+        }
+
+
+
+
+    }
+
+    private static void takeTurn(Scanner kB, Dice[] dice, ArrayList<Player> players, int currentPlayer, int arrowPile)
+    {
+        String line;
+        ArrayList<Integer> reRolls = new ArrayList<>();
+        reRolls.add(1);
+
         if(currentPlayer >= 4)
         {
-            currentPlayer=0;
+            currentPlayer =0;
         }
         System.out.println(players.get(currentPlayer) + ", It is your turn. \n");
 
-        for (int d=0; d<6;d++)
+        dice[currentPlayer].Roll();
+        System.out.println(dice[currentPlayer]);
+
+        for (int i = 0; i < dice.length; i++)
         {
-            dice[d].Roll();
-            System.out.print("Dice #"+d+":"+dice[d]+"  ");
+            if(dice[i].equals("Arrow"))
+            {
+                arrowPile--;
+
+
+            }
+
+
+
+
         }
 
-        String line;
-        do
+
+
+        while(reRolls.get(0)!=6)
         {
+            reRolls.remove(0);
+            System.out.println("Which dice would you like to re-roll? \n" +
+                    "Enter 6 for None");
 
-            System.out.println("Which dice would you like to re-roll? \nPlease enter with a space between each number or 0 for none");
             line = kB.next();
+            String[] nums = line.trim().split("\\s");
 
-            String[] num = line.split(" ");
-            for (int i = 0; i < num.length; i++)
-            {
-                endRoll[i] = Integer.parseInt(num[i]);
+            for (int i = 0; i < nums.length; i++) {
+                reRolls.add(Integer.parseInt(nums[i]));
             }
 
-
-            if (endRoll[0] != 0)
+            if(reRolls.get(0)==6)
             {
-                for (int i = 0; i < num.length; i++)
-                {
-                    dice[endRoll[i]].Roll();
-                    System.out.print("Dice #" + (i+1) + ":" + dice[i] + "  ");
-                }
-
+                break;
             }
-        }while(endRoll[0]!=0);
 
+            dice[currentPlayer].DiceKept(reRolls);
+            dice[currentPlayer].ReRoll();
+            System.out.println(dice[currentPlayer]);
 
-
-
-
-
-
-
+        }
+        currentPlayer++;
     }
 
     private static void createPlayers(Scanner kB, ArrayList<Player> players, ArrayList<Role> roles, int numPlayers, int ranInt) {
