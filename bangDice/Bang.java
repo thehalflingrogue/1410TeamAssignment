@@ -43,7 +43,7 @@ public class Bang {
 
         while(endGame==false)
         {
-            takeTurn(kB, dice, players, currentPlayer, arrowPile);//includes parts that will need to be changed for GUI set up
+            takeTurn(kB, dice, players, currentPlayer, arrowPile, endGame);//includes parts that will need to be changed for GUI set up
         }
 
 
@@ -51,13 +51,13 @@ public class Bang {
 
     }
 
-    private static void takeTurn(Scanner kB, Dice[] dice, ArrayList<Player> players, int currentPlayer, int arrowPile)
+    private static void takeTurn(Scanner kB, Dice[] dice, ArrayList<Player> players, int currentPlayer, int arrowPile, boolean endGame)
     {
         String line;
         ArrayList<Integer> reRolls = new ArrayList<>();
         reRolls.add(1);
 
-        if(currentPlayer >= 4)
+        if(currentPlayer >= players.size())
         {
             currentPlayer =0;
         }
@@ -71,7 +71,39 @@ public class Bang {
             if(dice[i].equals("Arrow"))
             {
                 arrowPile--;
+                players.get(currentPlayer).setArrowHeld(+1);
 
+                if(arrowPile==0)
+                {
+                    arrowPile=9;
+
+                    for(int j = 0;j<players.size();j++)
+                    {
+                        int ouch = players.get(j).getArrowHeld();
+                        int newHealth = players.get(j).getPlayerHealth() - ouch;
+                        players.get(j).setPlayerHealth(newHealth);
+                    }
+
+                    for (int k = 0; k<players.size();k++)
+                    {
+                        int knockout=players.get(k).getPlayerHealth();
+                        Role tempRole = players.get(k).getPlayerRole();
+                        if (knockout==0)
+                        {
+                            if(tempRole.equals(Role.SHERIFF))
+                            {
+                                endGame = true;
+                            }
+                            players.remove(k);
+                        }
+
+
+
+
+
+                    }
+
+                }
 
             }
 
