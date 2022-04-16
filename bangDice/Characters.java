@@ -1,4 +1,10 @@
 package bangDice;
+/**
+ * @author Ben Warner
+ *
+ * This class is not used in the current program. It has been left in the package so that character abilities can be
+ * added later if desired or in an update
+ */
 
 import java.util.Random;
 

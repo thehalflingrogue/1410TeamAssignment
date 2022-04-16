@@ -1,6 +1,10 @@
 package bangDice;
+/**
+ * @author Ben Warner
+ */
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -8,40 +12,86 @@ public class Bang {
     public static void main(String[] args)
     {
         Random rand = new Random();
+        Scanner kB = new Scanner( System.in );
+
         int arrowPile = 9;
-        bang.Dice[] dice = new bang.Dice[6];
+        Dice[] dice = new Dice[6];
         ArrayList<Player> players = new ArrayList<>();
 
-        //Assuming 4 player game. Will need to change if we add other game modes
-        Role[] roles = {Role.SHERIFF, Role.OUTLAW, Role.OUTLAW, Role.RENEGADE};
+
+        //Assuming 4 player game. Will need to change this block if we add other game modes
+        ArrayList<Role> roles = new ArrayList<>();
+        roles.add(Role.SHERIFF);
+        roles.add(Role.OUTLAW);
+        roles.add(Role.OUTLAW);
+        roles.add(Role.RENEGADE);
+
+        boolean endGame = false;
         Role tempRole;
+        int numPlayers =4;
+        int humanPlayers;
+        int ranInt = rand.nextInt(4);
+        int currentPlayer = rand.nextInt(4);
 
-        //This part if for testing only - will replace majority once we have a GUI
-        int numPlayers = 1;
-        String tempName="";
-        Scanner kB = new Scanner( System.in );
-        System.out.println("How many Human Players?");
-        numPlayers = kB.nextInt();
+        createPlayers(kB, players, roles, numPlayers, ranInt); //test method - will need changes once GUI is set up
 
-        for(int i =0; i<numPlayers;i++)
+        while(endGame==false)
         {
-            int ranInt = rand.nextInt(4);
-            int playerHealth=0;
-            String characterName="";
-            System.out.println("Please enter Player" + i + "'s name below:");
-            tempName= kB.nextLine();
-
-            tempRole = roles[ranInt];
-            roles[ranInt]=null;
-            while(tempRole.equals(null))
+            if(currentPlayer >= 4)
             {
-                tempRole = roles[ranInt];
+                currentPlayer=0;
+            }
+            System.out.println(players.get(currentPlayer) + ", It is your turn. \n");
+
+            System.out.println(dice);
+
+            for (int d=0; d<6;d++)
+            {
+                dice[d].Roll();
+                System.out.println(dice[d]);
             }
 
-            players.add(new Player(new Characters(characterName,playerHealth),tempRole,tempName));
+
         }
 
 
 
+
+    }
+
+    private static void createPlayers(Scanner kB, ArrayList<Player> players, ArrayList<Role> roles, int numPlayers, int ranInt) {
+        Role tempRole;
+        int humanPlayers;
+        String tempName;
+
+        System.out.print("How many Human Players? ");
+        humanPlayers = kB.nextInt();
+        System.out.println(); //added in to fix next skipping in below for loop
+
+        for(int i =0; i<humanPlayers;i++)
+        {
+            System.out.print("Please enter Player" + (i+1) + "'s name: ");
+            tempName= kB.next();
+
+            tempRole = roles.get(ranInt);
+            roles.remove(ranInt);
+
+            players.add(new Player(tempRole,tempName));
+
+
+        }
+
+        int temp = numPlayers-humanPlayers;
+
+        for (int i = 0; i < temp; i++)
+        {
+            int x =0;
+            tempRole = roles.get(x);
+            roles.remove(x);
+            players.add(new Player(tempRole));
+
+        }
+
+        System.out.println("\n Players and their Health are: \n" + players);
     }
 }

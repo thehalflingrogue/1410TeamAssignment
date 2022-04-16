@@ -1,7 +1,10 @@
-package bang;
-
+package bangDice;
+/**
+ * @author Trevor Hakanson
+ */
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 
@@ -12,8 +15,14 @@ public class Dice {
 	ArrayList<Integer> diceKeptArrayList = new ArrayList<>();
 	int randomNumber = 0;
 	int count =0;
-	 String faces[] = {"Arrow", "Dynamite", "Beer", " Bulls Eye 1", "Bulls Eye 2","Gatling"};
-	
+	String faces[] = {"Arrow", "Dynamite", "Beer", " Bulls Eye 1", "Bulls Eye 2","Gatling"};
+	/*String currentFace;
+
+	public Dice() {
+		currentFace = faces[ranNum.nextInt(6)];
+	}*/
+
+
 
 	public void Roll() {
 
@@ -49,17 +58,17 @@ public class Dice {
 		count++;	
 	}
 
-	
+
 	@Override
 	public String toString() {
 		String diceString = "";
-		
+
 	 for (int i: diceKeptArrayList) {
 		 diceString += faces[i] + " ";
-	
-		 
+
+
 	 }
-		
+
 		return diceString;
 
 	}
