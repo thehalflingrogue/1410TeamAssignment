@@ -22,6 +22,7 @@ public class Player
 	private String playerName = "";
 	Role playerRole;
 	int playerHealth;
+	private int maxHealth;
 	int arrowHeld = 0;
 
 	/**
@@ -41,6 +42,8 @@ public class Player
 		{
 			playerHealth +=2;
 		}
+		
+		this.maxHealth = playerHealth;
 
 	}
 
@@ -82,7 +85,11 @@ public class Player
 	 */
 	public void gainHealth()
 	{
-		this.playerHealth += 1;
+		if(playerHealth < maxHealth)
+		{
+			this.playerHealth += 1;
+		}
+		
 	}
 
 	/**
