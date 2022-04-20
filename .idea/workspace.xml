@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="c6e08d8f-d470-4021-9d52-4976e563ee34" name="Changes" comment="..." />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="2" />
+  </component>
+  <component name="ProjectId" id="27gKJxQqoxfPYmyhiUKMXp68OVa" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+  </component>
+  <component name="RunManager">
+    <configuration name="Bang" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="bangDice.Bang" />
+      <module name="1410TeamAssignment" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="bangDice.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Bang" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c6e08d8f-d470-4021-9d52-4976e563ee34" name="Changes" comment="" />
+      <created>1649736222575</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1649736222575</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Testing to see if repository works. Please add a line with your name to verify you can see and edit">
+      <created>1649736343338</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1649736343338</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Updated Characters class&#10; - String Array of 16 character names&#10; - Randomizer to pick one name in array&#10; - Constrctor that will set passed String to the random name">
+      <created>1649989640687</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1649989640687</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Created and Enum for the Role. &#10;Still working on the Player class">
+      <created>1649990314889</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1649990314889</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Character, Role and beginning of PLayer classes">
+      <created>1649993076016</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1649993076016</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Fixed Health in Characters. Created Bang class. Did not start work on methods in the Bang class yet.">
+      <created>1650075069214</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1650075069214</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Characters functions are now part of Players. Bang can create all players. Current issue is getting it the roll correctly so each player can take turns.">
+      <created>1650123551644</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1650123551644</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Changed Dice class and takeTurn() method">
+      <created>1650128366519</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1650128366519</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Changed Dice class back to original, finished takeTurn(), MAIN WHILE LOOP is in place, but condition never changes!">
+      <created>1650139633041</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1650139633041</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Started on methods for the Dice faces.">
+      <created>1650145131298</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1650145131298</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Arrow method is done. added a few methods in player class">
+      <created>1650414744237</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1650414744237</updated>
+    </task>
+    <task id="LOCAL-00011" summary="...">
+      <created>1650419694466</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1650419694466</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Testing to see if repository works. Please add a line with your name to verify you can see and edit" />
+    <MESSAGE value="Updated Characters class&#10; - String Array of 16 character names&#10; - Randomizer to pick one name in array&#10; - Constrctor that will set passed String to the random name" />
+    <MESSAGE value="Created and Enum for the Role. &#10;Still working on the Player class" />
+    <MESSAGE value="Character, Role and beginning of PLayer classes" />
+    <MESSAGE value="Fixed Health in Characters. Created Bang class. Did not start work on methods in the Bang class yet." />
+    <MESSAGE value="Characters functions are now part of Players. Bang can create all players. Current issue is getting it the roll correctly so each player can take turns." />
+    <MESSAGE value="Changed Dice class and takeTurn() method" />
+    <MESSAGE value="Changed Dice class back to original, finished takeTurn(), MAIN WHILE LOOP is in place, but condition never changes!" />
+    <MESSAGE value="Started on methods for the Dice faces." />
+    <MESSAGE value="Arrow method is done. added a few methods in player class" />
+    <MESSAGE value="..." />
+    <option name="LAST_COMMIT_MESSAGE" value="..." />
+  </component>
+</project>

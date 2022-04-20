@@ -1,0 +1,16 @@
+Index: bangDice/characters.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package bangDice;\r\n\r\npublic class characters\r\n{\r\n    public static void main(String[] args) {\r\n        System.out.println(\"Testing\");\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/bangDice/characters.java b/bangDice/characters.java
+--- a/bangDice/characters.java	(revision 67b267e5872730e4b11e609d6ec0da51c6832c11)
++++ b/bangDice/characters.java	(date 1649991888487)
+@@ -6,3 +6,4 @@
+         System.out.println("Testing");
+     }
+ }
++0
+\ No newline at end of file
