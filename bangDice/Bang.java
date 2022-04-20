@@ -9,12 +9,17 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Bang {
+    static int currentPlayer;
+    static boolean endGame = false;
+     static int arrowPile = 9;
+
+
     public static void main(String[] args)
     {
         Random rand = new Random();
         Scanner kB = new Scanner( System.in );
 
-        int arrowPile = 9;
+
 
         Dice[] dice = new Dice[4];
         for (int i = 0; i < 4; i++) {
@@ -32,18 +37,20 @@ public class Bang {
         roles.add(Role.OUTLAW);
         roles.add(Role.RENEGADE);
 
-        boolean endGame = false;
+
         Role tempRole;
         int numPlayers =4;
         int humanPlayers;
         int ranInt = rand.nextInt(4);
-        int currentPlayer = rand.nextInt(4);
+        currentPlayer = rand.nextInt(4);
+
         // player currentPlayer = players.get(rand.nextInt(4));
         createPlayers(kB, players, roles, numPlayers, ranInt); //test method - will need changes for GUI set up
 
         while(endGame==false)
         {
-            takeTurn(kB, dice, players, currentPlayer, arrowPile, endGame);//includes parts that will need to be changed for GUI set up
+            takeTurn(kB, dice, players, currentPlayer, arrowPile, endGame);
+            //includes parts that will need to be changed for GUI set up
         }
 
 
@@ -53,6 +60,8 @@ public class Bang {
     // nextPlayer
     // assign currentPlayer to next (make sure to wrap around).
 
+
+    //change to a boolean and make endGame == takeTurn in the while
     private static void takeTurn(Scanner kB, Dice[] dice, ArrayList<Player> players, int currentPlayer, int arrowPile, boolean endGame)
     {
         String line;
@@ -77,7 +86,7 @@ public class Bang {
             else if(dice[i].equals("Gatling"))
             {
                 int gatlingCount = 0;
-                for (Dice k : dice)
+                /*for (Dice k : dice)
                 {
                     if (dice[k].equals("Gatling"))
                     {
@@ -92,7 +101,7 @@ public class Bang {
                     }
 
                     players.get(currentPlayer).gainHealth();
-                }
+                }*/
             }
 
 
@@ -108,8 +117,14 @@ public class Bang {
             System.out.println("Which dice would you like to re-roll? \n" +
                     "Enter 6 for None");
 
+
             line = kB.next();
             String[] nums = line.trim().split("\\s");
+
+            if(nums[0].equals(6))
+            {
+                break;
+            }
 
             for (int i = 0; i < nums.length; i++) {
                 reRolls.add(Integer.parseInt(nums[i]));
@@ -118,12 +133,12 @@ public class Bang {
 
             if(reRolls.get(0)!=6)
             {
-                dice[currentPlayer].DiceKept(reRolls);
-                dice[currentPlayer].ReRoll();
+
+                dice[currentPlayer].Roll();
                 System.out.println(dice[currentPlayer]);
 
             }
-
+            dice[currentPlayer].DiceKept(reRolls);
             currentPlayer++;
         }
 
@@ -148,7 +163,8 @@ public class Bang {
         return arrowPile;
     }
 
-    private static void winCondition(ArrayList<Player> players) {
+    private static void winCondition(ArrayList<Player> players)
+    {
         boolean endGame;
         for (int k = 0; k< players.size(); k++)
         {
