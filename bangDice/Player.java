@@ -1,6 +1,7 @@
 package bangDice;
 /**
- * @author Rafael Villalobos with minor additions by Ben Warner
+ * @author Rafael Villalobos
+ * (minor additions by Ben Warner)
  */
 import java.util.Random;
 
@@ -68,32 +69,54 @@ public class Player
 		return playerName;
 	}
 
-
-	// the main purpose of the setter is for the CPU player to be labeled with a number like CPU 1, CPU 2..
-	public void setPlayerName(String playerName)
+	/**
+	 * @return Current Player Health
+	 */
+	public int getPlayerHealth()
 	{
-		this.playerName = playerName;
-	}
-
-	public int getPlayerHealth() {
 		return playerHealth;
 	}
 
-	public void setPlayerHealth(int playerHealth) {
-		this.playerHealth = playerHealth;
+	/**
+	 * Adds one health to the Player
+	 */
+	public void gainHealth()
+	{
+		this.playerHealth += 1;
 	}
 
+	/**
+	 * Removes one health from the target Player
+	 * @param p Player object that is being shot
+	 */
+	public void takeDMG(Player p)
+	{
+		p.playerHealth -= 1;
+	}
+
+	/**
+	 * Checks the Players Role
+	 * @return
+	 */
 	public Role getPlayerRole() {
 		return playerRole;
 	}
 
-	//# of Arrows player is holding
-	public int getArrowHeld() {
-		return arrowHeld;
+	/**
+	 * Will add one arrow to the players personal pile
+	 */
+	public void addArrow()
+	{
+		this.arrowHeld += 1;
 	}
-	//will be used to reset arrowHeld to 0 once the main methods pile is reduced to 0
-	public void setArrowHeld(int arrowHeld) {
-		this.arrowHeld = arrowHeld;
+
+	/**
+	 * Will subtract arrows from Player health and reset their personal pile to 0
+	 */
+    public void resetArrow()
+	{
+		this. playerHealth = this.playerHealth - this.arrowHeld;
+		this.arrowHeld = 0;
 	}
 
 	@Override

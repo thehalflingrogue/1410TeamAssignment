@@ -38,7 +38,7 @@ public class Bang {
         int humanPlayers;
         int ranInt = rand.nextInt(4);
         int currentPlayer = rand.nextInt(4);
-
+        // player currentPlayer = players.get(rand.nextInt(4));
         createPlayers(kB, players, roles, numPlayers, ranInt); //test method - will need changes for GUI set up
 
         while(endGame==false)
@@ -50,6 +50,8 @@ public class Bang {
 
 
     }
+    // nextPlayer
+    // assign currentPlayer to next (make sure to wrap around).
 
     private static void takeTurn(Scanner kB, Dice[] dice, ArrayList<Player> players, int currentPlayer, int arrowPile, boolean endGame)
     {
@@ -70,41 +72,27 @@ public class Bang {
         {
             if(dice[i].equals("Arrow"))
             {
-                arrowPile--;
-                players.get(currentPlayer).setArrowHeld(+1);
-
-                if(arrowPile==0)
+                arrowPile = arrowFace(players, currentPlayer, arrowPile);
+            }
+            else if(dice[i].equals("Gatling"))
+            {
+                int gatlingCount = 0;
+                for (Dice k : dice)
                 {
-                    arrowPile=9;
-
-                    for(int j = 0;j<players.size();j++)
+                    if (dice[k].equals("Gatling"))
                     {
-                        int ouch = players.get(j).getArrowHeld();
-                        int newHealth = players.get(j).getPlayerHealth() - ouch;
-                        players.get(j).setPlayerHealth(newHealth);
+                        gatlingCount += 1;
                     }
-
-                    for (int k = 0; k<players.size();k++)
-                    {
-                        int knockout=players.get(k).getPlayerHealth();
-                        Role tempRole = players.get(k).getPlayerRole();
-                        if (knockout==0)
-                        {
-                            if(tempRole.equals(Role.SHERIFF))
-                            {
-                                endGame = true;
-                            }
-                            players.remove(k);
-                        }
-
-
-
-
-
-                    }
-
                 }
+                if (gatlingCount == 3)
+                {
+                    for (Player p : players)
+                    {
 
+                    }
+
+                    players.get(currentPlayer).gainHealth();
+                }
             }
 
 
@@ -127,17 +115,59 @@ public class Bang {
                 reRolls.add(Integer.parseInt(nums[i]));
             }
 
-            if(reRolls.get(0)==6)
+
+            if(reRolls.get(0)!=6)
             {
-                break;
+                dice[currentPlayer].DiceKept(reRolls);
+                dice[currentPlayer].ReRoll();
+                System.out.println(dice[currentPlayer]);
+
             }
 
-            dice[currentPlayer].DiceKept(reRolls);
-            dice[currentPlayer].ReRoll();
-            System.out.println(dice[currentPlayer]);
+            currentPlayer++;
+        }
+
+    }
+
+    private static int arrowFace(ArrayList<Player> players, int currentPlayer, int arrowPile) {
+        arrowPile--;
+        players.get(currentPlayer).addArrow();
+
+        if(arrowPile ==0)
+        {
+            arrowPile =9;
+
+            for(int j = 0; j< players.size(); j++)
+            {
+                players.get(j).resetArrow();
+            }
+
+            winCondition(players);
 
         }
-        currentPlayer++;
+        return arrowPile;
+    }
+
+    private static void winCondition(ArrayList<Player> players) {
+        boolean endGame;
+        for (int k = 0; k< players.size(); k++)
+        {
+            int knockout= players.get(k).getPlayerHealth();
+            Role tempRole = players.get(k).getPlayerRole();
+            if (knockout==0)
+            {
+                if(tempRole.equals(Role.SHERIFF))
+                {
+                    endGame = true;
+                }
+                players.remove(k);
+            }
+
+
+
+
+
+        }
     }
 
     private static void createPlayers(Scanner kB, ArrayList<Player> players, ArrayList<Role> roles, int numPlayers, int ranInt) {

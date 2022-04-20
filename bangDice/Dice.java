@@ -52,7 +52,7 @@ public class Dice {
 		}
 		
 		diceKeptArrayList = diceKept;
-		count++;	
+		count++;
 	}
 
 	@Override
@@ -61,8 +61,8 @@ public class Dice {
 		String diceString = "";
 	 	for (int i: diceKeptArrayList)
 	 	{
-			diceString += faces[i] + ", ";
-			//"Dice #" + i + " is: " +	faces[i] + "\n";
+			diceString += //faces[i] + ", ";
+			"Dice #" + i + " is: " +	faces[i] + "\n";
 			//seems to be stepping through faces randomly? Needs fix - use line 54 in Bang class to test this
 	 	}
 
