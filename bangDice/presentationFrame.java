@@ -1,4 +1,4 @@
-package frames;
+package bangDice;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
