@@ -4,14 +4,9 @@ package bangDice;
  * @author Ben Warner
  */
 
-import static org.junit.Assert.assertFalse;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
-
-import org.junit.platform.engine.support.filter.ClasspathScanningSupport;
 
 public class Bang {
 	static int currentPlayer;
@@ -75,54 +70,62 @@ public class Bang {
 		if (currentPlayer >= players.size()) {
 			currentPlayer = 0;
 		}
-		System.out.println(players.get(currentPlayer) + ", It is your turn. Press Enter to continue \n");
+		System.out.println(players.get(currentPlayer) +
+				 " " + players.get(currentPlayer).getPlayerRole() +
+				", It is your turn. Press Enter to continue \n");
 
 		dice[currentPlayer].Roll();
-		System.out.println(dice[currentPlayer]);
 
-		if (dice[currentPlayer].dynamiteCount >= 3) {
-			players.get(currentPlayer).changeHealth(-1);
-			//input.close();
-			currentPlayer++;
-			return;
-		}
+		if (dynamiteFace(dice, players)) return;
 
 		while (dice[currentPlayer].count < 3) {
 			boolean isDone = false;
 			int diceCount = 0;
-			while (!isDone) {
+			while (isDone == false) {
 
+
+				System.out.println(dice[currentPlayer]);
 				System.out.println("Which dice would you like to hold? \n" + "Enter 6 for done or 7 for hold all dice");
-     
-				line = input.next();
-				  input.nextLine();
+
+				line = //input.next();
+						input.nextLine();
+				System.out.println("");
+				String[] tempNums = new String[0];
 				if (line.equals("6")) {
 					isDone = true;
 
-					break;
-				}
-
-				if (line.equals("7")) {
+					//break;
+				} else if (line.equals("7")) {
 					isDone = true;
-					reRolls = new ArrayList<Integer>();
-					for (int i = 0; i < 6; i++) {
-						reRolls.add(i);
+					//reRolls = new ArrayList<Integer>();
+					tempNums = line.trim().split("\\s");
+					for (int i = 0; i < tempNums.length; i++) {
+
+						reRolls.add(Integer.parseInt(tempNums[i]));
+						System.out.println(reRolls);
 					}
-					dice[currentPlayer].count=3;
-					break;
+					dice[currentPlayer].count = 3;
+					//break;
+				} else {
+					for (String i : tempNums) {
+						reRolls.add(Integer.valueOf(i));
+					}
 				}
 
 				diceCount++;
-				String[] nums = line.trim().split("\\s");
 
-				if (nums[0].equals("6")) {
+
+				/*String[] tempNums = line.trim().split("\\s");
+
+				if (tempNums[0].equals("6")) {
 					break;
 				}
 
-				for (int i = 0; i < nums.length; i++) {
+				for (int i = 0; i < tempNums.length; i++) {
 
-					reRolls.add(Integer.parseInt(nums[i]));
-				}
+					reRolls.add(Integer.parseInt(tempNums[i]));
+				}*/
+
 
 				if (diceCount >= 5) {
 					break;
@@ -132,8 +135,8 @@ public class Bang {
 
 			dice[currentPlayer].DiceKept(reRolls);
 			dice[currentPlayer].Roll();
+			if (dynamiteFace(dice, players)) return;
 			System.out.println(dice[currentPlayer]);
-			reRolls = new ArrayList<Integer>();
 
 			if (dice[currentPlayer].count == 3) {
 				dice[currentPlayer].count = 0;
@@ -143,7 +146,6 @@ public class Bang {
 
 		}
 
-		//Scanner input = new Scanner(System.in);
 		  
 		System.out.println("press enter to continue");
 		input.nextLine();
@@ -160,6 +162,7 @@ public class Bang {
 				System.out.println("what player do you want to give health to?");
 				int a = Integer.parseInt(input.nextLine());
 				players.get(a).changeHealth(1);
+				System.out.println(players.get(a) + " gained 1 health");
 
 				continue;
 
@@ -170,10 +173,6 @@ public class Bang {
 
 				System.out.println("what direction do you want to shoot? 1=left 2= right");
 
-//           	 while(input.hasNextLine()) {
-//           		 input.nextLine();
-//           	 }
-
 				int a = Integer.parseInt(input.nextLine());
 
 				if (a == 1) {
@@ -183,10 +182,17 @@ public class Bang {
 				otherPlayer += currentPlayer;
 
 				otherPlayer %= 4;
-				if (otherPlayer < 0) {
+
+				if(players.size()<4)
+				{
+					otherPlayer=0;
+				}
+				else if(otherPlayer < 0) {
 					otherPlayer = 4 + otherPlayer;
 				}
 				players.get(otherPlayer).changeHealth(-1);
+				System.out.println(players.get(otherPlayer) + " got shot!");
+				knockout(players);
 
 			}
 
@@ -196,15 +202,33 @@ public class Bang {
 		if (dice[currentPlayer].gatlingCount >= 3) {
 			for (Player p : players) {
 				p.changeHealth(-1);
+
+				knockout(players);
 			}
+			System.out.println("Everyone loses 1 Health!");
 
 			arrowPile += players.get(currentPlayer).arrowHeld;
 			players.get(currentPlayer).arrowHeld = 0;
 			players.get(currentPlayer).changeHealth(1);
 		}
+
 		currentPlayer++;
 		//input.close();
 
+	}
+
+	private static boolean dynamiteFace(Dice[] dice, ArrayList<Player> players) {
+		if (dice[currentPlayer].dynamiteCount >= 3) {
+
+			System.out.println(dice[currentPlayer]);
+			System.out.println("OUCH!!! 3 Dynamite!");
+			players.get(currentPlayer).changeHealth(-1);
+			//input.close();
+			currentPlayer++;
+			knockout(players);
+			return true;
+		}
+		return false;
 	}
 
 	private static int arrowFace(ArrayList<Player> players) {
@@ -213,6 +237,7 @@ public class Bang {
 
 		if (arrowPile == 0) {
 			arrowPile = 9;
+			System.out.println("Everyone is attacked by arrows!");
 
 			for (int j = 0; j < players.size(); j++)
 
@@ -220,32 +245,53 @@ public class Bang {
 				players.get(j).resetArrow();
 			}
 
-			winCondition(players);
+			knockout(players);
 
 		}
 		return arrowPile;
 	}
 
-	private static void winCondition(ArrayList<Player> players) {
+	private static void knockout(ArrayList<Player> players) {
 		boolean endGame;
 		for (int k = 0; k < players.size(); k++) {
 			int knockout = players.get(k).getPlayerHealth();
 			Role tempRole = players.get(k).getPlayerRole();
 			if (knockout == 0) {
 				if (tempRole.equals(Role.SHERIFF)) {
+
+					if(players.size()>=2)
+					{
+
+						System.out.println("Outlaws Win!");
+						endGame = true;
+					}
+					else
+					{
+						System.out.println("Renegade Wins!");
+						endGame = true;
+					}
+
+
+				}
+				System.out.println(players.get(k) + " is out!");
+				players.remove(k);
+				if(players.size()==1 && players.get(0).getPlayerRole().equals(Role.SHERIFF))
+				{
+					System.out.println("Sheriff Wins!");
 					endGame = true;
 				}
-				players.remove(k);
+
 			}
 
 		}
 	}
 
 	private static void createPlayers(ArrayList<Player> players, ArrayList<Role> roles, int numPlayers,
-			int ranInt) {
+		int ranInt) {
 		Role tempRole;
-		int humanPlayers;
+		int humanPlayers=0;
 		String tempName;
+/*		Will be used to when we have both Human and CPU Players
 
 		System.out.print("How many Human Players? ");
 		humanPlayers = input.nextInt();
@@ -260,7 +306,7 @@ public class Bang {
 
 			players.add(new Player(tempRole, tempName));
 
-		}
+		}*/
 
 		int temp = numPlayers - humanPlayers;
 

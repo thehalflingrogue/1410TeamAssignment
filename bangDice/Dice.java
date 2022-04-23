@@ -4,12 +4,9 @@ package bangDice;
  */
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
-import javax.security.auth.x500.X500Principal;
-
-import org.hamcrest.core.Is;
+//import org.hamcrest.core.Is;
 
 
 
