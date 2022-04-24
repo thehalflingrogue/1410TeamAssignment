@@ -22,12 +22,12 @@ import java.util.Scanner;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 
-public class loginFrame extends JFrame {
+public class registrationFrame extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField passwordField;
 	private JTextField userNameField;
-	private playerProfileLogin log = new playerProfileLogin();
+	private playerProfileCreator newProfile = new playerProfileCreator();
 
 	/**
 	 * Launch the application.
@@ -36,7 +36,7 @@ public class loginFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					loginFrame frame = new loginFrame();
+					registrationFrame frame = new registrationFrame();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -48,7 +48,7 @@ public class loginFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public loginFrame() {
+	public registrationFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 350, 200);
 		contentPane = new JPanel();
@@ -57,7 +57,7 @@ public class loginFrame extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
-		JLabel tittleLb = new JLabel("LogIn");
+		JLabel tittleLb = new JLabel("Register, No commas allowed");
 		tittleLb.setForeground(new Color(51, 0, 0));
 		tittleLb.setFont(new Font("Palatino Linotype", Font.BOLD | Font.ITALIC, 20));
 		tittleLb.setHorizontalAlignment(SwingConstants.CENTER);
@@ -105,31 +105,32 @@ public class loginFrame extends JFrame {
 		panel_1.setBackground(new Color(255, 153, 0));
 		contentPane.add(panel_1, BorderLayout.SOUTH);
 		
-		JButton logInBtn = new JButton("LogIn");
-		logInBtn.setBackground(new Color(51, 102, 51));
-		logInBtn.setForeground(new Color(51, 0, 0));
-		logInBtn.addActionListener(new ActionListener() {
+		JButton registerBtn = new JButton("Register");
+		registerBtn.setBackground(new Color(51, 102, 51));
+		registerBtn.setForeground(new Color(51, 0, 0));
+		registerBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{
 			    
-			    log.setUsername(userNameField.getText());
-			    log.setPassword(passwordField.getText());
-			    log.Validate();
+			    newProfile.setUsername(userNameField.getText());
+			    newProfile.setPassword(passwordField.getText());
 			    
-			    if(log.Validate())
+			    
+			    if(!newProfile.Check()&& !newProfile.hasComma())
 			    {
+			    	newProfile.createProfile();
 			    	dispose();
-					menuFrame mf = new menuFrame(log.getUsername(),new Color(255, 153, 51));
-					mf.setVisible(true);
+					presentationFrame pf = new presentationFrame();
+					pf.setVisible(true);
 			    }
 			    else
 			    {
-			    	JOptionPane.showMessageDialog(contentPane, "Wrong username or password.");
+			    	JOptionPane.showMessageDialog(contentPane, "The username is already taken. or not valid characters were used");
 			    }
 			}
 		});
-		logInBtn.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		panel_1.add(logInBtn);
+		registerBtn.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		panel_1.add(registerBtn);
 	}
 
 }

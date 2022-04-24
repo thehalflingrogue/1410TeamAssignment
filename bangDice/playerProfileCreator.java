@@ -13,6 +13,7 @@ public class playerProfileCreator
 	private Scanner verify;
 	
 	
+	
 	public void setUsername(String username)
 	   {
 	      this.username = username;       
@@ -26,6 +27,17 @@ public class playerProfileCreator
 	   }
 	   
 	
+	public boolean hasComma()
+	{
+		if(this.username.contains(",") || this.password.contains(","))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 	public void createProfile()
 	   {
 	      try(FileWriter newP = new FileWriter("res/playerProfiles.txt", true))
@@ -71,7 +83,6 @@ public class playerProfileCreator
 	      }
 	      
 	      return registered;
-
 	   }
 
 }

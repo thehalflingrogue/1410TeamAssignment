@@ -41,7 +41,7 @@ public class presentationFrame extends JFrame {
 	 */
 	public presentationFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 537, 563);
+		setBounds(100, 100, 550, 450);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -55,7 +55,7 @@ public class presentationFrame extends JFrame {
 		tittleLabel.setForeground(new Color(204, 0, 0));
 		tittleLabel.setBackground(new Color(255, 153, 51));
 		tittleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		tittleLabel.setFont(new Font("Palatino Linotype", Font.ITALIC, 44));
+		tittleLabel.setFont(new Font("Palatino Linotype", Font.ITALIC, 47));
 		panel.add(tittleLabel);
 		
 		JPanel panel_1 = new JPanel();
@@ -69,6 +69,10 @@ public class presentationFrame extends JFrame {
 		logInBtn.setFont(new Font("Palatino Linotype", Font.PLAIN, 40));
 		logInBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+			
+				dispose();
+				loginFrame lf = new loginFrame();
+				lf.setVisible(true);
 				
 			}
 		});
@@ -76,7 +80,11 @@ public class presentationFrame extends JFrame {
 		
 		JButton registrationBtn = new JButton("Create new Profile");
 		registrationBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e){
+				
+				dispose();
+				registrationFrame rf = new registrationFrame();
+				rf.setVisible(true);
 			}
 		});
 		registrationBtn.setForeground(new Color(51, 0, 0));
@@ -87,6 +95,10 @@ public class presentationFrame extends JFrame {
 		JButton guessBtn = new JButton("Play as Guess");
 		guessBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				dispose();
+				menuFrame mf = new menuFrame("Guess",new Color(255, 153, 51));
+				mf.setVisible(true);
 			}
 		});
 		guessBtn.setForeground(new Color(51, 0, 0));
@@ -101,7 +113,7 @@ public class presentationFrame extends JFrame {
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				menuFrame mf = new menuFrame();
+				menuFrame mf = new menuFrame("Test Name",new Color(255, 153, 51));
 				mf.setVisible(true);
 				
 			}

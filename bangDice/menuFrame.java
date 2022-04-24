@@ -1,6 +1,7 @@
 package bangDice;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 
@@ -9,6 +10,8 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.GridLayout;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -25,7 +28,7 @@ public class menuFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					menuFrame frame = new menuFrame();
+					menuFrame frame = new menuFrame("Test name",new Color(255, 153, 51));
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -37,32 +40,71 @@ public class menuFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public menuFrame() {
+	public menuFrame(String userName, Color bColor) {
+		Color bgColor = bColor;
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 537, 563);
+		setBounds(100, 100, 550, 450);
 		contentPane = new JPanel();
+		contentPane.setBackground(bgColor);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel = new JPanel();
+		panel.setBackground(bgColor);
 		contentPane.add(panel, BorderLayout.NORTH);
 		
 		JLabel tittleLabel = new JLabel("BANG THE DICE GAME");
+		tittleLabel.setForeground(new Color(204, 0, 0));
+		tittleLabel.setBackground(bgColor);
 		tittleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		tittleLabel.setFont(new Font("Palatino Linotype", Font.ITALIC, 38));
+		tittleLabel.setFont(new Font("Palatino Linotype", Font.ITALIC, 47));
 		panel.add(tittleLabel);
 		
 		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(bgColor);
 		contentPane.add(panel_1, BorderLayout.CENTER);
-		panel_1.setLayout(new GridLayout(10, 0, 0, 0));
+		panel_1.setLayout(new GridLayout(5, 0, 0, 0));
+		
+		JLabel welcomeLb = new JLabel("Welcome " + userName);
+		welcomeLb.setForeground(new Color(153, 0, 0));
+		welcomeLb.setFont(new Font("Palatino Linotype", Font.BOLD | Font.ITALIC, 33));
+		welcomeLb.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_1.add(welcomeLb);
 		
 		JButton btnNewButton = new JButton("Start Game");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				dispose();
+				gameFrame gf = new gameFrame(userName,bgColor);
+				gf.setVisible(true);
+			}
+		});
+		btnNewButton.setBackground(new Color(51, 102, 0));
+		btnNewButton.setForeground(new Color(51, 0, 0));
+		btnNewButton.setVerticalAlignment(SwingConstants.TOP);
+		btnNewButton.setFont(new Font("Palatino Linotype", Font.BOLD | Font.ITALIC, 35));
 		panel_1.add(btnNewButton);
 		
-		JButton btnNewButton_1 = new JButton("Settings");
+		JButton btnNewButton_1 = new JButton("Setting");
+		btnNewButton_1.setBackground(new Color(51, 102, 0));
+		btnNewButton_1.setForeground(new Color(51, 0, 0));
+		btnNewButton_1.setVerticalAlignment(SwingConstants.TOP);
+		btnNewButton_1.setFont(new Font("Palatino Linotype", Font.BOLD | Font.ITALIC, 35));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(!userName.equals("Guess"))
+				{
+					dispose();
+					settingsFrame sf = new settingsFrame(userName);
+					sf.setVisible(true);
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(contentPane, "This feature is exclusive for users with a profile");
+				}
 			}
 		});
 		panel_1.add(btnNewButton_1);
@@ -74,7 +116,7 @@ public class menuFrame extends JFrame {
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				gameFrame gf = new gameFrame();
+				gameFrame gf = new gameFrame("Test name",new Color(255, 153, 51));
 				gf.setVisible(true);
 			}
 		});

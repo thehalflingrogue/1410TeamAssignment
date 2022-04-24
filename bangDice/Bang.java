@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class Bang {
     static int currentPlayer;
     static boolean endGame = false;
-     static int arrowPile = 9;
+    static int arrowPile = 9;
 
 
     public static void main(String[] args)

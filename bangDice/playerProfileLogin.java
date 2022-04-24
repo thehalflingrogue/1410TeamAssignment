@@ -9,18 +9,21 @@ public class playerProfileLogin
 	 private String username;
 	 private String password;
 	 
-	 public void setUsername(String username)
-	   {
+	 public void setUsername(String username){
 	      this.username = username;       
 	   }
 	 
 	 
-	 public void setPassword(String password)
-	   {
+	 public void setPassword(String password){
 	      this.password = password;       
 	   }
 
-		public void Validate()
+	 public String getUsername() {
+		return username;
+		}
+
+
+		public boolean Validate()
 		   {
 		      boolean registered = false;
 		      String inUsername;
@@ -50,14 +53,7 @@ public class playerProfileLogin
 		         System.out.println("User not found!");
 		      }
 		      
-		      if (registered)
-		      {
-		         System.out.println("Welcome " + this.username);
-		      }
-		      else
-		      {
-		         System.out.println("Wrong username or password.");
-		      }
+		      return registered;
 	}
 
 }
